@@ -1,5 +1,5 @@
 # from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseNotFound, Http404
 
 
 def index(request):
@@ -20,9 +20,11 @@ def uniq_article(request):
 
 def article(request, page_id, name=""):
     print(request.GET)
-    if page_id >= 33:
+    if page_id >= 55:
+        if page_id == 55:
+            raise Http404
         return HttpResponse(
-            "This is an article #{} and it more than 32. {}".format(page_id, "Name of this article is {}".format(
+            "This is an article #{} and it more than 54. {}".format(page_id, "Name of this article is {}".format(
                 name) if name else "This is unnamed article"))
     else:
         return HttpResponse(
@@ -34,3 +36,7 @@ def reqget(request, catid):
     if request.GET:
         print(request.GET)
     return HttpResponse(f"i see this dict request.Get {catid}")
+
+
+def pageNotFound(request, exception):
+    return HttpResponseNotFound('<h1>СТРАНИЦА НЕ НАЙДЕНА<h1>')

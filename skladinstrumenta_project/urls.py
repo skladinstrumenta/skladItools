@@ -17,7 +17,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+from skladit_app.views import pageNotFound
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('skladit_app.urls'))
 ]
+
+handler404 = pageNotFound
